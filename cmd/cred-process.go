@@ -122,7 +122,8 @@ func credProcessRun(cmd *cobra.Command, args []string) error {
 		AccessKeyID:     creds.AccessKeyID,
 		SecretAccessKey: creds.SecretAccessKey,
 		SessionToken:    creds.SessionToken,
-		Expiration:      p.GetExpiration().Format(time.RFC3339),
+		// reuse the provided session duration
+		Expiration: time.Now().Add(p.SessionDuration).Format(time.RFC3339),
 	}
 
 	var output []byte
