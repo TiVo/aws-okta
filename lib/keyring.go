@@ -7,6 +7,11 @@ import (
 )
 
 func keyringPrompt(prompt string) (string, error) {
+	password := os.Getenv("AWS_OKTA_FILE_PASSPHRASE")
+	if len(password) > 0 {
+		return password, nil
+	}
+	
 	return PromptWithOutput(prompt, true, os.Stderr)
 }
 
